@@ -80,10 +80,21 @@ app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
  //----------------------
  // Routes
  //----------------------
-
+let startGame = false;
+let count = 15
+//every second, countdown by one
+let countdown = () =>{
+  setInterval(function() {
+    count--
+  }, 1000)
+}
 
 app.get('/' , (req, res) => {
-  res.render('home.ejs')
+  countdown();
+  res.render('home.ejs', {
+    startGame: startGame,
+    count: count
+  })
 });
 //
 // //test for toggle view
